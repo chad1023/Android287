@@ -26,10 +26,24 @@
         android:id="@+id/input" />
 
     <Button
-        android:text="Button"
+        android:text="Menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/clickbutton"
         android:onClick="click" />
+
+    <TextView
+        android:text="Order List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ordertext"
+        android:textSize="30sp"
+        android:textAlignment="center" />
 
 </LinearLayout>

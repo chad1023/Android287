@@ -1,14 +1,16 @@
 package com.example.lab430.myapplication;
 
-import android.media.Image;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,21 +18,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DrinkListActivity extends AppCompatActivity {
+public class DrinkListActivity extends AppCompatActivity{
 
+    ListView listView;
+    TextView OrderText;
 
+    final int [] ordernum = new int[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_list);
 
-        ListView listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView)findViewById(R.id.listView);
+        OrderText = (TextView)findViewById(R.id.OrderList);
 
 //      Simple ListView
         final String [] drink = new String[]{"juice","blacktea","greentea"};
+        for(int a :ordernum)
+        {
+            a=0;
+        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,                                              // Activity can be treated as "Context"
                 android.R.layout.simple_list_item_1,               //Layout
                 drink                                              //data
@@ -40,9 +50,10 @@ public class DrinkListActivity extends AppCompatActivity {
 //      Complex ListView (Use SimpleAdapter)
         List<Map<String, Object>> items = new ArrayList< Map<String,Object> >();
 
-        int [] drinkimg = new int[]{R.drawable.juice,R.drawable.blacktea,R.drawable.greentea};
-        int [] drinkprice = new int[]{15,25,30};
-
+        final int [] drinkimg = new int[]{R.drawable.juice,R.drawable.blacktea,R.drawable.greentea};
+        final int [] drinkprice = new int[]{15,25,30};
+        final int [] heat=new int[]{54,10,10};
+        final float [] sugar=new float[]{2.0f,0.5f,0.3f};
 
         for (int i=0;i<drink.length;i++)
         {
@@ -72,10 +83,12 @@ public class DrinkListActivity extends AppCompatActivity {
             tmp.imgId=drinkimg[i];
             tmp.name=drink[i];
             tmp.price=drinkprice[i];
+            tmp.heat=heat[i];
+            tmp.sugar=sugar[i];
             drinkmenu.add(tmp);
         }
 
-        DrinkInfoAdapter customadapter=new DrinkInfoAdapter(
+        final DrinkInfoAdapter customadapter=new DrinkInfoAdapter(
                 this,
                 R.layout.raw_drink,
                 drinkmenu
@@ -87,11 +100,47 @@ public class DrinkListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d("click","click"+drink[i]);
-                Toast.makeText(getApplicationContext(),"order:"+drink[i],Toast.LENGTH_SHORT).show();
+                ordernum[i]++;
+                OrderText.setText("");
+                for(int j =0;j<drink.length;j++)
+                {
+                    String t =OrderText.getText().toString()+"\n";
+                    OrderText.setText(t+drink[j]+":"+ordernum[j]+" ");
+                }
+
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                Toast.makeText(getApplicationContext(),"order:"+drink[pos],Toast.LENGTH_SHORT).show();
+                DrinkInfo drinkinfo=customadapter.getItem(pos);
+                StartDetail(drinkinfo);
+                return true;
+            }
+        });
+
+
+        Button b = (Button)findViewById(R.id.clickbutton);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.putExtra("ordernum",ordernum);
+                intent.putExtra("drink",drink);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }
-
+    public void StartDetail(DrinkInfo drinkinfo)
+    {
+        Intent detailintent=new Intent();
+        detailintent.putExtra("drinkinfo",drinkinfo);
+        detailintent.setClass(this,DrinkDetailActivity.class);
+        startActivity(detailintent);
+    }
 
 
 }
