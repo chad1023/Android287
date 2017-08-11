@@ -4,6 +4,7 @@ package com.example.lab430.myapplication;
 //import android.content.DialogInterface;
 //import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,9 +29,11 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView questext;
+    TextView ordertext;
     EditText editText;
     ImageView image_up;
+
+    final static int REQUEST_CODE_DRINKLIST_ACTIVITY = 0;
 
     //    RadioGroup radioGroup;
 //
@@ -41,18 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        setContentView();
         setContentView(R.layout.layout_test);
 
-        questext = (TextView) findViewById(R.id.questiontext);
-
-        image_up = (ImageView)findViewById(R.id.image01);
-//        image_up.setImageDrawable(getDrawable(R.drawable.blackteaicon));
-        Picasso.with(image_up.getContext()).load(R.drawable.blackteaicon).into(image_up);
-
-
-        EditText input=(EditText)findViewById(R.id.input);
-        String inputtext = input.getText().toString();
-        questext.setText(inputtext);
-
-        Log.d("tag","hello");
+        ordertext=(TextView)findViewById(R.id.ordertext);
 
         Button clickbutton = (Button)findViewById(R.id.clickbutton);
         clickbutton.setOnClickListener(this);
@@ -62,30 +54,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        //click3
-        questext.setText("hello!!!");
-//        image_up.setImageResource(R.drawable.greenteaicon);
-        Picasso.with(image_up.getContext()).load(R.drawable.greenteaicon).into(image_up);
-        Toast.makeText(this,"hello!!!!",Toast.LENGTH_SHORT).show();
-        Dialog3();
+        Intent intent=new Intent();
+        intent.setClass(MainActivity.this,DrinkListActivity.class);
+        startActivityForResult(intent,REQUEST_CODE_DRINKLIST_ACTIVITY);
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_DRINKLIST_ACTIVITY){
+            if(resultCode == RESULT_OK){
+                String [] drink= data.getStringArrayExtra("drink");
+                int [] ordernum = data.getIntArrayExtra("ordernum");
+                Log.d("result","OK");
+                String orders="";
+                for(int i=0;i<drink.length;i++)
+                {
+                    if(ordernum[i]>0)
+                    {
+                        orders+=(drink[i]+":"+String.valueOf(ordernum[i])+"\n");
+                    }
+                }
+                ordertext.setText(orders);
+            }
+        }
     }
 
     public void Dialog()
     {
 
         new AlertDialog.Builder(this)
-                .setTitle("Title")
-                .setMessage("message")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setTitle("系統資訊")
+                .setMessage("真的確定要離開嗎")
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
                     }
                 })
                 .show();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isTaskRoot())
+        {
+            Dialog();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
     public void Dialog2()
