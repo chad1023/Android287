@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_store"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.example.lab430.myapplication.StoreActivity"
+    android:orientation="vertical">
+
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:id="@+id/fragment"
+    android:layout_height="0dp"
+    android:layout_weight="8">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:text="Order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/menubutton"
+            android:layout_weight="1"
+            android:background="?android:attr/windowBackground" />
+
+        <Button
+            android:text="Store"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/storebutton"
+            android:layout_weight="1"
+            android:background="?android:attr/windowBackground" />
+
+        <Button
+            android:text="About"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/aboutbutton"
+            android:layout_weight="1"
+            android:background="?android:attr/windowBackground" />
+    </LinearLayout>
+
+</LinearLayout>

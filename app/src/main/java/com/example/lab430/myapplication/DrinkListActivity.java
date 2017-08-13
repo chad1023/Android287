@@ -1,5 +1,6 @@
 package com.example.lab430.myapplication;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,19 +23,22 @@ public class DrinkListActivity extends AppCompatActivity{
 
     ListView listView;
     TextView OrderText;
+    ArrayList<DrinkInfo>drinkmenu=new ArrayList<DrinkInfo>();
 
     final int [] ordernum = new int[3];
+    final String [] drink = new String[]{"juice","blacktea","greentea"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_list);
 
+
         listView = (ListView)findViewById(R.id.listView);
         OrderText = (TextView)findViewById(R.id.OrderList);
 
 //      Simple ListView
-        final String [] drink = new String[]{"juice","blacktea","greentea"};
+
         for(int a :ordernum)
         {
             a=0;
@@ -76,7 +80,7 @@ public class DrinkListActivity extends AppCompatActivity{
 
 //      Complex ListView (Use CustomAdapter)
 
-        ArrayList<DrinkInfo>drinkmenu=new ArrayList<DrinkInfo>();
+
         for (int i=0;i<drink.length;i++)
         {
             DrinkInfo tmp = new DrinkInfo();
@@ -134,6 +138,8 @@ public class DrinkListActivity extends AppCompatActivity{
             }
         });
     }
+
+
     public void StartDetail(DrinkInfo drinkinfo)
     {
         Intent detailintent=new Intent();

@@ -49,6 +49,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button clickbutton = (Button)findViewById(R.id.clickbutton);
         clickbutton.setOnClickListener(this);
 
+        Button storebutton =(Button)findViewById(R.id.storebutton);
+        storebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,StoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
