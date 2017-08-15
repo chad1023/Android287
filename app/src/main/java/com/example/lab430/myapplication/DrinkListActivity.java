@@ -1,6 +1,5 @@
 package com.example.lab430.myapplication;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -126,7 +125,7 @@ public class DrinkListActivity extends AppCompatActivity{
         });
 
 
-        Button b = (Button)findViewById(R.id.clickbutton);
+        Button b = (Button)findViewById(R.id.clearbutton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

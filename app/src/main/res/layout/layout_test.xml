@@ -13,23 +13,15 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="129dp"
         android:id="@+id/image01"
         android:src="@drawable/blacktea" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/input" />
 
     <Button
         android:text="Menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/clickbutton"
+        android:id="@+id/clearbutton"
         android:onClick="click" />
 
     <TextView
@@ -51,6 +43,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/storebutton" />
+
+    <Button
+        android:text="UserSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/usersetting_button" />
+
+    <Button
+        android:text="load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadbutton" />
+    <Button
+        android:text="loadfromSDcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadfromsdbutton" />
 
 
 </LinearLayout>
