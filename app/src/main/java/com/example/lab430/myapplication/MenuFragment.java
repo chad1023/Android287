@@ -83,11 +83,11 @@ public class MenuFragment extends Fragment {
         for (int i=0;i<drink.length;i++)
         {
             DrinkInfo tmp = new DrinkInfo();
-            tmp.imgId=drinkimg[i];
-            tmp.name=drink[i];
-            tmp.price=drinkprice[i];
-            tmp.heat=heat[i];
-            tmp.sugar=sugar[i];
+            tmp.setImgId(drinkimg[i]);
+            tmp.setName(drink[i]);
+            tmp.setPrice(drinkprice[i]);
+            tmp.setHeat(heat[i]);
+            tmp.setSugar(sugar[i]);
             drinkmenu.add(tmp);
         }
         Log.d("Fragment","MenuFragment onCreate");

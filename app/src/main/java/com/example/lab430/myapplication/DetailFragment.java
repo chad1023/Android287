@@ -74,10 +74,10 @@ public class DetailFragment extends Fragment {
         heattext=(TextView)getView().findViewById(R.id.caloriestext);
         sugartext=(TextView)getView().findViewById(R.id.sugartext);
         image=(ImageView)getView().findViewById(R.id.drinkimage);
-        nametext.setText(drink.name);
-        heattext.setText("Calories:"+String.valueOf(drink.heat));
-        sugartext.setText("Sugar:"+String.valueOf(drink.sugar));
-        image.setImageResource(drink.imgId);
+        nametext.setText(drink.getName());
+        heattext.setText("Calories:"+String.valueOf(drink.getHeat()));
+        sugartext.setText("Sugar:"+String.valueOf(drink.getSugar()));
+        image.setImageResource(drink.getImgId());
 
 
     }

@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -72,9 +70,9 @@ public class DrinkInfoAdapter extends ArrayAdapter<DrinkInfo> {
         }
         public void setView(DrinkInfo data)
         {
-            item_picasso.load(data.imgId).into(item_image);
-            item_name.setText(data.name);
-            item_price.setText("$"+String.valueOf(data.price));
+            item_picasso.load(data.getImgId()).into(item_image);
+            item_name.setText(data.getName());
+            item_price.setText("$"+String.valueOf(data.getPrice()));
         }
 
     }

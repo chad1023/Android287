@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class DrinkDetailActivity extends AppCompatActivity {
     TextView name;
     TextView calories;
@@ -27,11 +25,11 @@ public class DrinkDetailActivity extends AppCompatActivity {
         Intent intent=getIntent();
         DrinkInfo drinkInfo=intent.getParcelableExtra("drinkinfo");
         
-        name.setText(drinkInfo.name);
-        calories.setText("Calories:"+ String.valueOf(drinkInfo.heat));
-        sugar.setText("Carbohydrate:"+ String.valueOf(drinkInfo.sugar));
+        name.setText(drinkInfo.getName());
+        calories.setText("Calories:"+ String.valueOf(drinkInfo.getHeat()));
+        sugar.setText("Carbohydrate:"+ String.valueOf(drinkInfo.getSugar()));
 
-        image.setImageResource(drinkInfo.imgId);
+        image.setImageResource(drinkInfo.getImgId());
 
 
     }
