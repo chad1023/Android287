@@ -29,7 +29,7 @@ public class UserSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
 
-
+        
 //
         preferences = getSharedPreferences(Application.class.getName(),MODE_PRIVATE);
 //        //get the preferences with Applications name as the key

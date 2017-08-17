@@ -10,6 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
 public class StoreActivity extends AppCompatActivity implements View.OnClickListener{
 
     FragmentManager fragmentManager;
@@ -35,6 +40,8 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
         aboutbutton.setOnClickListener(this);
         storebutton.setOnClickListener(this);
         menubutton.setOnClickListener(this);
+
+
 
     }
 

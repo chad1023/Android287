@@ -1,11 +1,35 @@
 package com.example.lab430.myapplication;
 
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 
 /**
@@ -24,10 +48,16 @@ public class AboutFragment extends Fragment {
     private String mParam2;
 
 
+//    GoogleApiClient googleApiClient;
+
+
     public AboutFragment() {
         // Required empty public constructor
     }
 
+    void createGoogleAPIClient() {
+
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -53,6 +83,8 @@ public class AboutFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -62,4 +94,33 @@ public class AboutFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_about, container,false);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+
+
+    }
+
+
+
+    private static class GeoCodingTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String address = params[0];
+            double[] latlng = Utils.getLatLngFromGoogleMapAPI(address);
+            if(latlng != null) {
+                Log.d("Debug", String.valueOf(latlng[0]));
+                Log.d("Debug", String.valueOf(latlng[1]));
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+        }
+    }
 }
