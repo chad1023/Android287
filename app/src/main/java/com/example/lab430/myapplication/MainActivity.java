@@ -1,8 +1,6 @@
 package com.example.lab430.myapplication;
 
-//import android.content.DialogInterface;
-//import android.content.DialogInterface;
-//import android.support.v7.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,11 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-//import android.widget.TextView;
-//import android.view.View;
-//import android.widget.EditText;
-//import android.widget.RadioGroup;
-//import android.widget.TextView;
+
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,24 +30,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView ordertext;
     EditText editText;
     ImageView image_up;
+    Button clickbutton,storebutton,usersettingbutton,loadbutton;
 
     final static int REQUEST_CODE_DRINKLIST_ACTIVITY = 0;
 
-    //    RadioGroup radioGroup;
-//
-//    String drink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView();
         setContentView(R.layout.layout_test);
+        processView();
+        processController();
+    }
 
+    //在這個方法中，取得畫面元件物件後指定給變數
+    void processView()
+    {
         ordertext=(TextView)findViewById(R.id.ordertext);
 
-        Button clickbutton = (Button)findViewById(R.id.clearbutton);
+        clickbutton = (Button)findViewById(R.id.clearbutton);
+        storebutton =(Button)findViewById(R.id.storebutton);
+        usersettingbutton=(Button)findViewById(R.id.usersetting_button);
+        loadbutton=(Button)findViewById(R.id.loadbutton);
+
+    }
+
+    //在這個方法中，宣告或建立需要的監聽物件，並執行所有需要的註冊工作
+    void processController()
+    {
         clickbutton.setOnClickListener(this);
 
-        Button storebutton =(Button)findViewById(R.id.storebutton);
+
         storebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        Button usersettingbutton=(Button)findViewById(R.id.usersetting_button);
+
         usersettingbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        Button loadbutton=(Button)findViewById(R.id.loadbutton);
+
+
         loadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,12 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
-
     }
 
-
+    //override 的東西分兩種:extends(繼承)的、implements(實作)要求的
+    //onclick是onclicklistener 要求要實作的
     @Override
     public void onClick(View view) {
         Intent intent=new Intent();
@@ -121,30 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void Dialog()
-    {
-
-        new AlertDialog.Builder(this)
-                .setTitle("系統資訊")
-                .setMessage("真的確定要離開嗎")
-                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .show();
-
-
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -233,7 +215,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return content;//回傳讀寫結果content
     }
-    public void Dialog2()
+
+    //lesson 3 alertdialog
+    public void Dialog()//the simple dialog
+    {
+
+        new AlertDialog.Builder(this)
+                .setTitle("系統資訊")
+                .setMessage("真的確定要離開嗎")
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
+
+
+
+    }
+
+
+    public void Dialog2()//使用 list 作爲 dialog
     {
         final String[] dinner = {"腿庫","雞蛋糕","沙威瑪","澳美客","麵線","麵疙瘩"};
 
@@ -246,25 +256,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }).show();
 
-//        AlertDialog.Builder dialog_list = new AlertDialog.Builder(MainActivity.this);
-//        dialog_list.setTitle("利用List呈現");
-//        dialog_list.setItems(dinner, new DialogInterface.OnClickListener(){
-//            @Override
-//
-//            //只要你在onClick處理事件內，使用which參數，就可以知道按下陣列裡的哪一個了
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//                Toast.makeText(MainActivity.this, "你選的是" + dinner[which], Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        dialog_list.show();
     }
 
-    public void Dialog3()
+    public void Dialog3()//使用自製layout 作為 dialog
     {
 
-        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-        final View dialog_view = inflater.inflate(R.layout.alertdialog_use,null);
+        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);//get the layoutinflater
+        final View dialog_view = inflater.inflate(R.layout.alertdialog_use,null);//use inflater.inflate to get the view from layout_id
 
         new AlertDialog.Builder(this)
                 .setTitle("請輸入名字")
@@ -277,29 +275,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
                     }
                 }).show();
-//        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-//        final View v = inflater.inflate(R.layout.alertdialog_use, null);
-//
-//
-//        new AlertDialog.Builder(MainActivity.this)
-//                .setTitle("請輸入你的id")
-//                .setView(v)
-//                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        EditText editText = (EditText) (v.findViewById(R.id.editText1));
-//                        Toast.makeText(getApplicationContext(), "你的id是" +
-//                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .show();
     }
-//    public void click(View view)
-//    {
-//        String text = editText.getText().toString();
-//        text = text + "  Order: " + drink;
-//        textView.setText(text);
-//    }
+
 
 
 

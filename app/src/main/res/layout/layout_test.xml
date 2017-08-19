@@ -55,11 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/loadbutton" />
-    <Button
-        android:text="loadfromSDcard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/loadfromsdbutton" />
 
 
 </LinearLayout>
