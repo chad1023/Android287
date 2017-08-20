@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String s=ReadFile();
                 ordertext.setText(s);
+
             }
         });
 
@@ -101,11 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         Intent intent=new Intent();
         intent.setClass(MainActivity.this,DrinkListActivity.class);
-        startActivityForResult(intent,REQUEST_CODE_DRINKLIST_ACTIVITY);
+        startActivityForResult(intent,REQUEST_CODE_DRINKLIST_ACTIVITY);//跳轉至 DrinkList 並且等待結果
 
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//接收從Drinklist 回傳回來的 結果
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_DRINKLIST_ACTIVITY){
             if(resultCode == RESULT_OK){
@@ -128,9 +130,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //override 按下返回鍵的function
     @Override
     public void onBackPressed() {
-        if(isTaskRoot())
+        if(isTaskRoot())//如果是root，按下返回鍵會離開app=>顯示對話框予以提示
         {
             Dialog();
         }
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onBackPressed();
         }
     }
+
     public void writeFile(String content)
     {
 
@@ -226,7 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 })
